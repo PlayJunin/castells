@@ -1,0 +1,50 @@
+
+<script src="Assets/js/aframe.min.js"></script>
+<script src="Assets/js/aframe-ar.js"></script>
+<script src="Assets/js/aframe-extras.loaders.min.js"></script>
+
+<div style='position: fixed; top: 10px; width:100%; text-align: center; z-index: 1;'>
+	<button>
+     	Habilitar Sonido
+	</button>
+	</div>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no," />
+<meta name="description" content="AR Aframe ChromaKey">
+<meta name="mobile-web-app-capable" content="yes">
+<meta http-equiv="Feature-Policy" content="camera '*'" /> 
+
+
+<body style='margin : 0px; overflow: hidden;'>
+
+    <a-scene embedded arjs="debugUIEnabled: false; patternRatio: 0.90" vr-mode-ui="enabled: false">   
+
+    <a-marker preset='custom' type='pattern' url='Assets/pattern-3e.patt'>
+	    
+    <video id="mivideo" crossOrigin="anonymous" playsinline webkitplaysinline autoplay loop controls muted src="Assets/media/3e.mp4"></video>
+    <a-video src="#mivideo" position="0 0 0" scale="1 1 1" rotation="270 0 0" ></a-video>
+   
+   <script> 
+      var m = document.querySelector("a-marker")
+      m.addEventListener("markerFound", (e)=>{
+      console.log("found")
+      var v = document.querySelector('#mivideo').play();
+})
+      m.addEventListener("markerLost", (e)=>{
+      console.log("lost")
+      var v = document.querySelector('#mivideo').pause();
+  
+})
+
+
+document.querySelector("button").addEventListener("click", (e)=>{
+	console.log("Activar Sonido")
+  var v = document.querySelector('#mivideo').muted=false;
+})
+     </script>
+     
+      </a-marker>
+      <a-entity camera></a-entity>
+    </a-scene>
+</body>
